@@ -6,7 +6,7 @@ import seaborn as sns
 from download import download
 import matplotlib.pyplot as plt
 import seaborn as sns
-pd.set_option('display.max_row', 4)
+pd.set_option('display.max_row', 68)
 #%%
 df_bicycle = pd.read_csv("La myriade de Totems de Montpellier.csv")
 url = " https://docs.google.com/spreadsheets/d/e/2PACX-1vQVtdpXMHB4g9h75a0jw8CsrqSuQmP5eMIB2adpKR5hkRggwMwzFy5kB-AIThodhVHNLxlZYm8fuoWj/pub?gid=2105854808&single=true&output=csv"
@@ -33,10 +33,10 @@ for i in range (len(bicycle_3)):
 bicycle_3
 
 #%%
-bicycle_3.index[bicycle_3['Date'] == "15/10/2020"] #donne la ligne exacte à compter du 5 janvier 2021
+bicycle_3.index[bicycle_3['Date'] == "28/10/2020"] #donne la ligne exacte à compter du 5 janvier 2021
 #%%
 bicycle_4 = bicycle_3.copy() 
-bicycle_4 = bicycle_3.iloc[103:] #va au dessus de toutes les lignes à partir de la 103(celle trouvée au dessus)
+bicycle_4 = bicycle_3.iloc[106:] #va au dessus de toutes les lignes à partir de la 103(celle trouvée au dessus)
 
 #%% 
 for i in range (len(bicycle_4)):
@@ -54,40 +54,49 @@ for i in range (bicycle_4.shape[0]):
 bicycle_4['Jour'] = l #noté de Lundi = 0 à Dimanche =6
 bicycle_4 = bicycle_4[(bicycle_4['Jour'] != 6) & (bicycle_4['Jour'] != 5)] #J'enlève tous les weekends 
 #%%
+bicycle_4 = bicycle_4[(bicycle_4['Heure'] >= "08:31")]
+for i in range (len(bicycle_4)):
+    bicycle_4.rename(index = {bicycle_4.index[i]:i}, inplace = True)
+#%%
+bicycle_4 = bicycle_4.drop([7,8]) 
+#%%
 for i in range (len(bicycle_4)):
     bicycle_4.rename(index = {bicycle_4.index[i]:i}, inplace = True)
 bicycle_4
-# %%
-#utile pour la régression linéaire
-j = []
-for i in range (1,len(bicycle_4)+1):
-    j.append(bicycle_4.iloc[:i,2].sum())
-bicycle_4['Total'] = j
-# %%
-bicycle_5 = bicycle_4.copy()
-bicycle_5 = bicycle_4[(bicycle_4["Heure"] <= "09:30")]
-for i in range (len(bicycle_5)):
-    bicycle_5.rename(index = {bicycle_5.index[i]:i}, inplace = True)
-bicycle_5
+#%%
+bicycle_4['Total du jour'].mean()
+#%%
+bicycle_4['Total du jour'].median()
 
-#%%
-#suppression du matin de Nöel et nouvel an, les données sont faussées
-bicycle_5 = bicycle_5.drop([9,10]) 
-bicycle_5 = bicycle_5.drop([25]) 
-bicycle_5_vendredi = bicycle_5[bicycle_4['Jour'] == 4]
-#%%
-for i in range (len(bicycle_5)):
-    bicycle_5.rename(index = {bicycle_5.index[i]:i}, inplace = True)
-bicycle_5
-# %%
-bicycle_5['Total du jour'].mean()
-#%%
-bicycle_5['Total du jour'].median()
-#%%
-bicycle_5_vendredi['Total du jour'].mean()
-#%%
-bicycle_5_vendredi['Total du jour'].median()
-#%%
+
+
+#####
+# Etude des vendredis
+# #utile pour la régression linéaire
+# j = []
+# for i in range (1,len(bicycle_4)+1):
+#     j.append(bicycle_4.iloc[:i,2].sum())
+# bicycle_4['Total'] = j
+# # %%
+# bicycle_5 = bicycle_4.copy()
+# bicycle_5 = bicycle_4[(bicycle_4["Heure"] <= "09:37") & (bicycle_5["Heure"] >= "08:30")]
+# for i in range (len(bicycle_5)):
+#     bicycle_5.rename(index = {bicycle_5.index[i]:i}, inplace = True)
+# bicycle_5
+# #%%
+# bicycle_5_vendredi = bicycle_5[bicycle_4['Jour'] == 4]
+# for i in range (len(bicycle_5)):
+#     bicycle_5.rename(index = {bicycle_5.index[i]:i}, inplace = True)
+# bicycle_5
+# bicycle_5['Total du jour'].mean()
+# bicycle_5['Total du jour'].median()
+# bicycle_5_vendredi['Total du jour'].mean()
+# bicycle_5_vendredi['Total du jour'].median()
+
+
+
+
+#####
 #REGRESSION LINEAIRE
 
 # import numpy as np 

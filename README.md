@@ -10,4 +10,4 @@ After studying my data, I predicted that there would be 209 bikes to Albert Prem
 Visualization part
 For this part, I will use the data from http://data.montpellier3m.fr/dataset/comptages-velo-et-pieton-issus-des-eco-compteurs/resource/75f5e367-99fb-482f-ba5c to visualize the bike traffic in Montpellier. I choose to make a gif to visualize the bike traffic in Montpellier.
 
-Lien gif :
+Gif link : https://makeagif.com/i/qYm0wv
