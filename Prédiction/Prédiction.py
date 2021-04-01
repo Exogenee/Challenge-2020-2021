@@ -33,10 +33,10 @@ for i in range (len(bicycle_3)):
 bicycle_3
 
 #%%
-bicycle_3.index[bicycle_3['Date'] == "28/10/2020"] #donne la ligne exacte à compter du 5 janvier 2021
+bicycle_3.index[bicycle_3['Date'] == "28/10/2020"] #donne la ligne exacte à compter du 28 octobre 2020
 #%%
 bicycle_4 = bicycle_3.copy() 
-bicycle_4 = bicycle_3.iloc[106:] #va au dessus de toutes les lignes à partir de la 103(celle trouvée au dessus)
+bicycle_4 = bicycle_3.iloc[106:] #prend les valeurs trouvée au dessus de la ligne 106(celle trouvée au dessus)
 
 #%% 
 for i in range (len(bicycle_4)):
@@ -52,7 +52,7 @@ for i in range (bicycle_4.shape[0]):
     l.append(pd.to_datetime(bicycle_4.iloc[i,0]).weekday()) 
 #%%
 bicycle_4['Jour'] = l #noté de Lundi = 0 à Dimanche =6
-bicycle_4 = bicycle_4[(bicycle_4['Jour'] != 6) & (bicycle_4['Jour'] != 5)] #J'enlève tous les weekends 
+bicycle_4 = bicycle_4[(bicycle_4['Jour'] != 6) & (bicycle_4['Jour'] != 5)] #retrait de tous les weekends 
 #%%
 bicycle_4 = bicycle_4[(bicycle_4['Heure'] >= "08:31")]
 for i in range (len(bicycle_4)):
