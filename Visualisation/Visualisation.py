@@ -69,4 +69,3 @@ dossiers = [f"{dossier}\\{file}" for file in os.listdir(dossier)]
 
 images = [imageio.imread(file) for file in dossiers]
 imageio.mimwrite('Visualization_gif', images, fps=1)
-# %%
